@@ -1,4 +1,4 @@
-package com.example.project2.Controller;
+package com.example.project2.controller;
 
 import com.example.project2.dto.MemberDTO;
 import org.springframework.web.bind.annotation.*;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/main")
+@RequestMapping("/get")
 public class GetController {
 
     @GetMapping("/hello/{name}")
@@ -20,7 +20,7 @@ public class GetController {
     }
 
 
-    //localhost:8080?name=name&email=email@gmail.com&organization=organization
+    //localhost:port?name=name&email=email@gmail.com&organization=organization
     @GetMapping("/request1")
     public String getRequestParam1(@RequestParam String name,
                                    @RequestParam String email,
