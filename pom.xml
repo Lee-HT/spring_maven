@@ -45,7 +45,7 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- swagger 추가 -->
+		<!-- swagger2 추가 -->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
