@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/delete")
-public class deleteController {
+public class DeleteController {
 
     @DeleteMapping("/delete/{variable}")
     public String DeleteVariable(@PathVariable String variable){
