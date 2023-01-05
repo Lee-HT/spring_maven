@@ -11,9 +11,9 @@ import javax.persistence.Table;
 @Entity
 @Getter @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Table(name = "product")
-@NoArgsConstructor
 public class productEntity {
 
     @Id
