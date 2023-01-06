@@ -1,4 +1,4 @@
-package com.example.project2.Exception;
+package com.example.project2.common.Exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +16,7 @@ public class IAExceptionHandler {
 
     private final Logger LOGGER = LoggerFactory.getLogger(IAExceptionHandler.class);
 
-    @ExceptionHandler
+    @ExceptionHandler(value = Exception.class)
     public ResponseEntity<Map<String,String>> ExceptionHandler(Exception e){
         HttpHeaders responseHeaders = new HttpHeaders();
         HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
@@ -29,5 +29,17 @@ public class IAExceptionHandler {
         map.put("message", "에러 발생");
 
         return new ResponseEntity<>(map,responseHeaders,httpStatus);
+    }
+
+    @ExceptionHandler(value = IAException.class)
+    public ResponseEntity<Map<String,String>> ExceptionHandler(IAException e){
+        HttpHeaders responseHeaders = new HttpHeaders();
+
+        Map<String,String> map = new HashMap<>();
+        map.put("error type",e.getHttpStatusType());
+        map.put("error code", Integer.toString(e.getHttpStatusCode()));
+        map.put("message", e.getMessage());
+
+        return new ResponseEntity<>(map, responseHeaders, e.getHttpStatus());
     }
 }

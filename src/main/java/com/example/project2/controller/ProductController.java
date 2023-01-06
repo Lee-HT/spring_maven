@@ -1,6 +1,8 @@
 package com.example.project2.controller;
 
 
+import com.example.project2.common.Constants;
+import com.example.project2.common.Exception.IAException;
 import com.example.project2.data.dto.productDTO;
 import com.example.project2.service.ProductService;
 import org.slf4j.Logger;
@@ -64,5 +66,9 @@ public class ProductController {
     @DeleteMapping("/delete/{productId}")
     public productDTO deleteProduct(@PathVariable String productId) { return null; }
 
+    @PostMapping("/post/exception")
+    public void exceptionTest() throws IAException {
+        throw new IAException(Constants.ExceptionClass.PRODUCT, HttpStatus.NOT_FOUND, "의도한 에러 발생");
+    }
 
 }
