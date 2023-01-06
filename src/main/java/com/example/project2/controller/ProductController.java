@@ -41,10 +41,10 @@ public class ProductController {
     @PostMapping(value = "/post")
     public ResponseEntity<productDTO> createProduct(@Valid @RequestBody productDTO productdto){
 
-        if (productdto.getProductID().equals("") || productdto.getProductID().isEmpty()){  //#테스트
-            LOGGER.error("[createProduct] failed Response :: productID is Empty");
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(productdto);
-        }
+//        if (productdto.getProductID().equals("") || productdto.getProductID().isEmpty()){  //#테스트
+//            LOGGER.error("[createProduct] failed Response :: productID is Empty");
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(productdto);
+//        }
 
         String productID = productdto.getProductID();
         String productName = productdto.getProductName();
