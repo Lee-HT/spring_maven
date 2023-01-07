@@ -1,11 +1,9 @@
 package com.example.project2.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 @Getter @Setter
 public class MemberDTO {

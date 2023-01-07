@@ -11,7 +11,7 @@ public interface RestTemplateService {
 
     public String getName2();
 
-    public ResponseEntity<MemberDTO> postdto();
+    public ResponseEntity<MemberDTO> postDTO();
 
     public ResponseEntity<MemberDTO> addHeader();
 }
