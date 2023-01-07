@@ -16,6 +16,7 @@
 <!--	<packaging>jar</packaging>-->
 
 	<name>project2</name>
+	<url>https://IA.springboot</url>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
