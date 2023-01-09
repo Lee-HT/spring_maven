@@ -120,11 +120,13 @@
 				</configuration>
 			</plugin>
 
+			<!-- jacoco -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.5</version>
 				<configuration>
+					<!--<rules>jacoco 설정</rules> -->
 					<excludes>**/DeleteController.class</excludes>
 				</configuration>
 				<executions>

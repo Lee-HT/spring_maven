@@ -10,12 +10,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.mockito.Mockito.verify;
 
+//@SpringBootTest(classes = {productDataHandlerImpl.class, ProductServiceImpl.class})
 @ExtendWith(SpringExtension.class)
 @Import({productDataHandlerImpl.class, ProductServiceImpl.class})
 public class ProductServiceImplTest {
@@ -28,6 +30,7 @@ public class ProductServiceImplTest {
 
     @Test
     public void getProductTest(){
+        //given
         Mockito.when(productDataHandler.getProductEntity("123"))
                 .thenReturn(new productEntity("123","pen",2000,3000));
 
@@ -54,6 +57,5 @@ public class ProductServiceImplTest {
         Assertions.assertEquals(productdto.getProductStock(),3000);
 
         verify(productDataHandler).saveProductEntity("123","pen",2000,3000);
-
     }
 }
