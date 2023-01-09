@@ -39,8 +39,8 @@ public class RestTemplateServiceImpl implements RestTemplateService {
     public String getName(){
         URI uri = UriComponentsBuilder
                 .fromUriString("http://localhost:8050")
-                .path("/server/name")
-                .queryParam("name","IA") //복수 값은 여러개 사용
+                .path("/server/get/name")
+                .queryParam("name","IA") //복수 값은 여러 개 사용
                 .encode()
                 .build()
                 .toUri();
@@ -58,7 +58,7 @@ public class RestTemplateServiceImpl implements RestTemplateService {
     public String getName2(){
         URI uri = UriComponentsBuilder
                 .fromUriString("http://localhost:8050")
-                .path("/server/pathvariable/{name}")
+                .path("/server/get/pathvariable/{name}")
                 .encode()
                 .build()
                 .expand("IA") //복수 값 넣을시 ,로 구분
