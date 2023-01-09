@@ -60,7 +60,7 @@ public class ProductController {
                 "[createProduct] Response >> productID  : {}, productName : {}, productPrice : {}, productStock : {}"
                 ,response.getProductID(), response.getProductName(), response.getProductPrice(), response.getProductStock()
         );
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
 
     }
 
