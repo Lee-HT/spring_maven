@@ -17,7 +17,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "short-url")
+@Table(name = "short_url")
 public class ShortUrlEntity extends BaseEntity{
 
     @Id

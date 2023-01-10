@@ -39,7 +39,11 @@ public class ShortUrlController {
 
     @GetMapping()
     public ShortUrlResponseDTO getShortUrl(String originalUrl){
+        long startTime = System.currentTimeMillis();
         ShortUrlResponseDTO shortUrlResponseDTO = new ShortUrlResponseDTO("ss","ss");
+        long endTime = System.currentTimeMillis();
+
+        log.info("[getShortUrl] responsne time : {}ms",(endTime - startTime));
 
         return shortUrlService.getShortUrl(CLIENT_ID,CLIENT_SECRET,originalUrl);
     }

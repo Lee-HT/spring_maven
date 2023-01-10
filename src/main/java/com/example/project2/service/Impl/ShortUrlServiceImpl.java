@@ -79,7 +79,7 @@ public class ShortUrlServiceImpl implements ShortUrlService {
 
         URI uri = UriComponentsBuilder
                 .fromUriString("https://openapi.naver.com")
-                .path("/v1/util/sho rturl")
+                .path("/v1/util/shorturl")
                 .queryParam("url",originalUrl)
                 .encode()
                 .build()
@@ -90,8 +90,8 @@ public class ShortUrlServiceImpl implements ShortUrlService {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(new MediaType[]{MediaType.APPLICATION_JSON}));
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("X-naver-Client-ID",ClientId);
-        headers.set("X-naver-Client-ID",ClientSecret);
+        headers.set("X-Naver-Client-Id",ClientId);
+        headers.set("X-Naver-Client-Secret",ClientSecret);
 
         HttpEntity<String> entity = new HttpEntity<>("",headers);
 

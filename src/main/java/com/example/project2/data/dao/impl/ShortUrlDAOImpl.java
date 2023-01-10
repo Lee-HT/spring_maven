@@ -11,31 +11,31 @@ public class ShortUrlDAOImpl implements ShortUrlDAO {
     private final ShortUrlRepository shortUrlRepository;
 
     @Autowired
-    public ShortUrlDAOImpl(ShortUrlRepository shortUrlRepository){
+    public ShortUrlDAOImpl(ShortUrlRepository shortUrlRepository) {
         this.shortUrlRepository = shortUrlRepository;
     }
 
     @Override
-    public ShortUrlEntity saveShortUrl(ShortUrlEntity shortUrl){
-        ShortUrlEntity foundShortUrl = shortUrlRepository.save(shortUrl);
+    public ShortUrlEntity saveShortUrl(ShortUrlEntity shortUrlEntity){
+        ShortUrlEntity foundShortUrl = shortUrlRepository.save(shortUrlEntity);
         return foundShortUrl;
     }
 
     @Override
     public ShortUrlEntity getShortUrl(String originalUrl){
-        ShortUrlEntity foundShortUrl = shortUrlRepository.findByOrgUrl(originalUrl);
+        ShortUrlEntity foundShortUrl = shortUrlRepository.findByUrl(originalUrl);
         return foundShortUrl;
     }
 
     @Override
     public ShortUrlEntity getOriginUrl(String shortUrl){
-        ShortUrlEntity foundShortUrl = shortUrlRepository.findByUrl(shortUrl);
+        ShortUrlEntity foundShortUrl = shortUrlRepository.findByOrgUrl(shortUrl);
         return foundShortUrl;
     }
 
     @Override
     public ShortUrlEntity updateShortUrl(ShortUrlEntity newShortUrl){
-        ShortUrlEntity foundShortUrl = shortUrlRepository.findByOrgUrl(newShortUrl.getUrl());
+        ShortUrlEntity foundShortUrl = shortUrlRepository.findByOrgUrl(newShortUrl.getOrgUrl());
 
         foundShortUrl.setUrl(newShortUrl.getUrl());
 
@@ -51,7 +51,7 @@ public class ShortUrlDAOImpl implements ShortUrlDAO {
     }
 
     @Override
-    public void deleteByOriginUrl(String originalUrl) {
+    public void deleteByOriginalUrl(String originalUrl) {
         ShortUrlEntity foundShortUrl = shortUrlRepository.findByOrgUrl(originalUrl);
         shortUrlRepository.delete(foundShortUrl);
     }

@@ -5,7 +5,7 @@ import com.example.project2.data.entity.ShortUrlEntity;
 public interface ShortUrlDAO {
     ShortUrlEntity saveShortUrl(ShortUrlEntity shortUrlEntity);
 
-    ShortUrlEntity getShortUrl(String OriginalUrl);
+    ShortUrlEntity getShortUrl(String originalUrl);
 
     ShortUrlEntity getOriginUrl(String shortUrl);
 
@@ -13,5 +13,5 @@ public interface ShortUrlDAO {
 
     void deleteByShortUrl(String shortUrl);
 
-    void deleteByOriginUrl(String originalUrl);
+    void deleteByOriginalUrl(String originalUrl);
 }
