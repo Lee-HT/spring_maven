@@ -1,7 +1,7 @@
 package com.example.project2.controller;
 
 
-import com.example.project2.dto.MemberDTO;
+import com.example.project2.data.dto.MemberDTO;
 import com.example.project2.service.RestTemplateService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

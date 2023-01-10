@@ -1,7 +1,6 @@
 package com.example.project2.service;
 
-import com.example.project2.dto.MemberDTO;
-import io.swagger.models.Response;
+import com.example.project2.data.dto.MemberDTO;
 import org.springframework.http.ResponseEntity;
 
 public interface RestTemplateService {
