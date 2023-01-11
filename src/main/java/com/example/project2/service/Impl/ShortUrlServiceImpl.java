@@ -139,6 +139,7 @@ public class ShortUrlServiceImpl implements ShortUrlService {
                 uri, HttpMethod.GET, entity, NaverUrlDTO.class);
 
         log.info("[requestShortUrl] request has been successfully complete");
+        log.info("entity : {}" ,entity);
 
         return responseEntity;
     }
