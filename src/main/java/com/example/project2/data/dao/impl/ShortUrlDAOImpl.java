@@ -23,13 +23,13 @@ public class ShortUrlDAOImpl implements ShortUrlDAO {
 
     @Override
     public ShortUrlEntity getShortUrl(String originalUrl){
-        ShortUrlEntity foundShortUrl = shortUrlRepository.findByUrl(originalUrl);
+        ShortUrlEntity foundShortUrl = shortUrlRepository.findByOrgUrl(originalUrl);
         return foundShortUrl;
     }
 
     @Override
     public ShortUrlEntity getOriginUrl(String shortUrl){
-        ShortUrlEntity foundShortUrl = shortUrlRepository.findByOrgUrl(shortUrl);
+        ShortUrlEntity foundShortUrl = shortUrlRepository.findByUrl(shortUrl);
         return foundShortUrl;
     }
 
@@ -39,9 +39,9 @@ public class ShortUrlDAOImpl implements ShortUrlDAO {
 
         foundShortUrl.setUrl(newShortUrl.getUrl());
 
-        ShortUrlEntity saveShortUrl = shortUrlRepository.save(foundShortUrl);
+        ShortUrlEntity saveShortUrlEntity = shortUrlRepository.save(foundShortUrl);
 
-        return saveShortUrl;
+        return saveShortUrlEntity;
     }
 
     @Override
@@ -52,7 +52,7 @@ public class ShortUrlDAOImpl implements ShortUrlDAO {
 
     @Override
     public void deleteByOriginalUrl(String originalUrl) {
-        ShortUrlEntity foundShortUrl = shortUrlRepository.findByOrgUrl(originalUrl);
-        shortUrlRepository.delete(foundShortUrl);
+        ShortUrlEntity foundOriginalUrl = shortUrlRepository.findByOrgUrl(originalUrl);
+        shortUrlRepository.delete(foundOriginalUrl);
     }
 }

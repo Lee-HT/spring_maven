@@ -5,6 +5,8 @@ import com.example.project2.service.ShortUrlService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,6 +54,14 @@ public class ShortUrlController {
     public ShortUrlResponseDTO updateShortUrl(String originalUrl) { return null; }
 
     @DeleteMapping("/")
-    public ShortUrlResponseDTO deleteShortUrl(String url){ return null; }
+    public ResponseEntity<String> deleteShortUrl(String url){
+        try{
+            shortUrlService.deleteShortUrl(url);
+        }catch (RuntimeException e){
+            e.printStackTrace();
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body("정상 삭제");
+    }
 
 }

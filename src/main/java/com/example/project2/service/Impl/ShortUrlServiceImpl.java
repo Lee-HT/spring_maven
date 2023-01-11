@@ -4,6 +4,7 @@ import com.example.project2.data.dao.ShortUrlDAO;
 import com.example.project2.data.dto.NaverUrlDTO;
 import com.example.project2.data.dto.ShortUrlResponseDTO;
 import com.example.project2.data.entity.ShortUrlEntity;
+import com.example.project2.data.repository.ShortUrlRepository;
 import com.example.project2.service.ShortUrlService;
 import java.net.URI;
 import java.util.Arrays;
@@ -22,18 +23,41 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Slf4j
 public class ShortUrlServiceImpl implements ShortUrlService {
 
+    private final ShortUrlRepository shortUrlRepository;
+
     private final ShortUrlDAO shortUrlDAO;
 //    private final ShortUrlRedisRepository shortUrlRedisRepository;
 
     @Autowired
-    public ShortUrlServiceImpl(ShortUrlDAO shortUrlDAO){
+    public ShortUrlServiceImpl(ShortUrlDAO shortUrlDAO,
+            ShortUrlRepository shortUrlRepository){
         this.shortUrlDAO = shortUrlDAO;
 //        this.shortUrlRedisRepository = shortUrlRedisRepository;
+        this.shortUrlRepository = shortUrlRepository;
     }
 
     public ShortUrlResponseDTO getShortUrl(String clientID, String clientSecret, String originalUrl){
-        return null;
+        log.info("[getShortUrl] No Entity in Database");
+        ShortUrlEntity getShortUrlEntity = shortUrlDAO.getShortUrl(originalUrl);
 
+        String orgUrl;
+        String shortUrl;
+
+        if (getShortUrlEntity == null){
+            log.info("[getShortUrl] No Entity in Database.");
+            ResponseEntity<NaverUrlDTO> responseEntity = requestShortUrl(clientID,clientSecret,originalUrl);
+
+            orgUrl = responseEntity.getBody().getResult().getOrgUrl();
+            shortUrl = responseEntity.getBody().getResult().getUrl();
+        }else {
+            orgUrl = getShortUrlEntity.getOrgUrl();
+            shortUrl = getShortUrlEntity.getUrl();
+        }
+
+        ShortUrlResponseDTO shortUrlResponseDTO = new ShortUrlResponseDTO(orgUrl, shortUrl);
+
+        log.info("[getShortUrl] Response DTO : {}",shortUrlResponseDTO.toString());
+        return shortUrlResponseDTO;
     }
 
     @Override
@@ -64,14 +88,27 @@ public class ShortUrlServiceImpl implements ShortUrlService {
     }
 
     @Override
-    public ShortUrlResponseDTO deleteByShortUrl(String shortURl){
-        return null;
+    public void deleteShortUrl(String url){
+        if(url.contains("me2.do")){
+            log.info("[deleteShortUrl] Request Url is ShortUrl");
+            deleteByShortUrl(url);
+        }else {
+            log.info("[deleteShortUrl Request Url is OriginalUrl");
+            deleteByOriginalUrl(url);
+        }
+
     }
 
-    @Override
-    public ShortUrlResponseDTO deleteByOriginalUrl(String orgUrl){
-        return null;
+    private void deleteByShortUrl(String url){
+        log.info("[deleteByShortUrl] delete record");
+        shortUrlDAO.deleteByShortUrl(url);
     }
+
+    private void deleteByOriginalUrl(String url){
+        log.info("[deleteByOriginalUrl] delete record");
+        shortUrlDAO.deleteByOriginalUrl(url);
+    }
+
 
     private ResponseEntity<NaverUrlDTO> requestShortUrl(String ClientId,String ClientSecret,String originalUrl){
 
