@@ -17,8 +17,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public productDTO saveProduct(Long productId, String productName, int productPrice, int productStock) {
-        productEntity productentity = productdataHandler.saveProductEntity(productId, productName, productPrice, productStock);
+    public productDTO saveProduct(Long productID, String productName, int productPrice, int productStock) {
+        productEntity productentity = productdataHandler.saveProductEntity(productID, productName, productPrice, productStock);
 
         productDTO productdto = new productDTO(productentity.getProductID(),
                 productentity.getProductName(), productentity.getProductPrice(), productentity.getProductStock());

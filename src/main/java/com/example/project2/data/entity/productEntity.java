@@ -4,9 +4,7 @@ package com.example.project2.data.entity;
 import com.example.project2.data.dto.productDTO;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Getter @Setter
