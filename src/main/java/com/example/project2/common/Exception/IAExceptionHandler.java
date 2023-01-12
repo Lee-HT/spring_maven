@@ -39,7 +39,7 @@ public class IAExceptionHandler {
 
         Map<String,String> map = new HashMap<>();
         map.put("error type",e.getHttpStatusType());
-        map.put("error code", Integer.toString(e.getHttpStatusCode()));  //<String, Object>로 설정하면 불 필요
+        map.put("error code", Integer.toString(e.getHttpStatusCode()));
         map.put("message", e.getMessage());
 
         return new ResponseEntity<>(map, responseHeaders, e.getHttpStatus());

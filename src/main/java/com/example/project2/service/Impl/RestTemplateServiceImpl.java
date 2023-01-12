@@ -1,6 +1,6 @@
 package com.example.project2.service.Impl;
 
-import com.example.project2.data.dto.MemberDTO;
+import com.example.project2.dto.MemberDTO;
 import com.example.project2.service.RestTemplateService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,11 +16,10 @@ import java.net.URI;
 public class RestTemplateServiceImpl implements RestTemplateService {
     private final Logger LOGGER = LoggerFactory.getLogger(RestTemplateServiceImpl.class);
 
-    @Override
     public String getIA(){
         URI uri = UriComponentsBuilder
                 .fromUriString("http://localhost:8050")
-                .path("/server/get")
+                .path("/server/IA")
                 .encode()
                 .build()
                 .toUri();
@@ -39,8 +38,8 @@ public class RestTemplateServiceImpl implements RestTemplateService {
     public String getName(){
         URI uri = UriComponentsBuilder
                 .fromUriString("http://localhost:8050")
-                .path("/server/get/name")
-                .queryParam("name","IA") //복수 값은 여러 개 사용
+                .path("/server/name")
+                .queryParam("name","IA")
                 .encode()
                 .build()
                 .toUri();
@@ -54,14 +53,13 @@ public class RestTemplateServiceImpl implements RestTemplateService {
         return responseEntity.getBody();
     }
 
-    @Override
     public String getName2(){
         URI uri = UriComponentsBuilder
                 .fromUriString("http://localhost:8050")
-                .path("/server/get/pathvariable/{name}")
+                .path("/server/pathvariable/{name}")
                 .encode()
                 .build()
-                .expand("IA") //복수 값 넣을시 ,로 구분
+                .expand("IA")
                 .toUri();
 
         RestTemplate restTemplate = new RestTemplate();
@@ -73,7 +71,6 @@ public class RestTemplateServiceImpl implements RestTemplateService {
         return responseEntity.getBody();
     }
 
-    @Override
     public ResponseEntity<MemberDTO> postDTO(){
         URI uri = UriComponentsBuilder
                 .fromUriString("http://localhost:8050")
@@ -87,8 +84,8 @@ public class RestTemplateServiceImpl implements RestTemplateService {
 
         MemberDTO memberDTO = new MemberDTO();
         memberDTO.setName("IA!!");
-        memberDTO.setEmail("emails.com");
-        memberDTO.setOrganization("IA Spring boots");
+        memberDTO.setEmail("email.com");
+        memberDTO.setOrganization("IA Spring boot");
 
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<MemberDTO> responseEntity = restTemplate.postForEntity(uri, memberDTO,MemberDTO.class);
@@ -100,11 +97,10 @@ public class RestTemplateServiceImpl implements RestTemplateService {
 
     }
 
-    @Override
     public ResponseEntity<MemberDTO> addHeader(){
         URI uri = UriComponentsBuilder
                 .fromUriString("http://localhost:8050")
-                .path("/server/addheader")
+                .path("/server/addHeader")
                 .encode()
                 .build()
                 .toUri();
