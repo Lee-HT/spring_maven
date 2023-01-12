@@ -36,6 +36,7 @@ public class productRepositoryTest {
     @Test
     void findTest(){
         List<productEntity> foundAll = productrepository.findAll();
+
         System.out.println("---- Test Data ----");
         for(productEntity productentity : foundAll){
             System.out.println(productentity.toString());
