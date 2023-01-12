@@ -65,7 +65,9 @@ public class ProductController {
     }
 
     @DeleteMapping("/delete/{productId}")
-    public productDTO deleteProduct(@PathVariable Long productId) { return null; }
+    public productDTO deleteProduct(@PathVariable Long productId) {
+        return null;
+    }
 
     @PostMapping("/post/exception")
     public void exceptionTest() throws IAException {
