@@ -14,10 +14,10 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Builder
 @Table(name = "product")
-public class productEntity {
+public class productEntity extends BaseEntity{
 
     @Id
-    String productID;
+    Long productID;
     String productName;
     Integer productPrice;
     Integer productStock;

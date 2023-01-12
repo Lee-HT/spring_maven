@@ -4,7 +4,7 @@ import com.example.project2.data.dto.productDTO;
 
 public interface ProductService {
 
-    productDTO saveProduct(String productId,String productName, int productPrice, int productStock);
+    productDTO saveProduct(Long productId,String productName, int productPrice, int productStock);
 
-    productDTO getProduct(String productId);
+    productDTO getProduct(Long productId);
 }

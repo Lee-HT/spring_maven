@@ -4,13 +4,11 @@ import com.example.project2.data.dto.productDTO;
 import com.example.project2.data.entity.productEntity;
 import com.example.project2.data.handler.impl.productDataHandlerImpl;
 import com.example.project2.service.Impl.ProductServiceImpl;
-import com.example.project2.service.ProductService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -31,31 +29,31 @@ public class ProductServiceImplTest {
     @Test
     public void getProductTest(){
         //given
-        Mockito.when(productDataHandler.getProductEntity("123"))
-                .thenReturn(new productEntity("123","pen",2000,3000));
+        Mockito.when(productDataHandler.getProductEntity(1L))
+                .thenReturn(new productEntity(1L,"pen",2000,3000));
 
-        productDTO productdto = productService.getProduct("123");
+        productDTO productdto = productService.getProduct(1L);
 
-        Assertions.assertEquals(productdto.getProductID(),"123");
+        Assertions.assertEquals(productdto.getProductID(),1L);
         Assertions.assertEquals(productdto.getProductName(),"pen");
         Assertions.assertEquals(productdto.getProductPrice(),2000);
         Assertions.assertEquals(productdto.getProductStock(),3000);
 
-        verify(productDataHandler).getProductEntity("123");
+        verify(productDataHandler).getProductEntity(1L);
     }
 
     @Test
     public void setProductTest(){
-        Mockito.when(productDataHandler.saveProductEntity("123","pen",2000,3000))
-                .thenReturn(new productEntity("123","pen",2000,3000));
+        Mockito.when(productDataHandler.saveProductEntity(1L,"pen",2000,3000))
+                .thenReturn(new productEntity(1L,"pen",2000,3000));
 
-        productDTO productdto = productService.saveProduct("123","pen",2000,3000);
+        productDTO productdto = productService.saveProduct(1L,"pen",2000,3000);
 
-        Assertions.assertEquals(productdto.getProductID(),"123");
+        Assertions.assertEquals(productdto.getProductID(),1L);
         Assertions.assertEquals(productdto.getProductName(),"pen");
         Assertions.assertEquals(productdto.getProductPrice(),2000);
         Assertions.assertEquals(productdto.getProductStock(),3000);
 
-        verify(productDataHandler).saveProductEntity("123","pen",2000,3000);
+        verify(productDataHandler).saveProductEntity(1L,"pen",2000,3000);
     }
 }

@@ -28,7 +28,7 @@ public class ProductController {
 
     //logger로 성능 체크
     @GetMapping("/get/{productId}")
-    public productDTO getProduct(@PathVariable String productId){
+    public productDTO getProduct(@PathVariable Long productId){
         long startTime = System.currentTimeMillis();
         LOGGER.info("[ProductController] perform {} of IA API", "getProduct");
 
@@ -49,7 +49,7 @@ public class ProductController {
 //            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(productdto);
 //        }
 
-        String productID = productdto.getProductID();
+        Long productID = productdto.getProductID();
         String productName = productdto.getProductName();
         int productPrice = productdto.getProductPrice();
         int productStock = productdto.getProductStock();
@@ -65,7 +65,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/delete/{productId}")
-    public productDTO deleteProduct(@PathVariable String productId) { return null; }
+    public productDTO deleteProduct(@PathVariable Long productId) { return null; }
 
     @PostMapping("/post/exception")
     public void exceptionTest() throws IAException {

@@ -6,6 +6,6 @@ public interface productDAO {
 
     productEntity saveProduct(productEntity productentity);
 
-    productEntity getProduct(String productId);
+    productEntity getProduct(Long ID);
 
 }

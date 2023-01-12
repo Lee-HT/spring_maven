@@ -19,7 +19,7 @@ public class productDTO {
 
 //    @Size(min=0,max=10)
     @NotNull
-    private String productID;
+    private Long productID;
     @NotNull
     private String productName;
     @NotNull

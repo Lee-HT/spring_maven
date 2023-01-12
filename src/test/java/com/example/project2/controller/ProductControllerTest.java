@@ -38,10 +38,10 @@ public class ProductControllerTest {
     void getProductTest() throws Exception{
 
         //given Mock 객체가 특정 상황에서 해야하는 행위를 정의하는 메소드
-        given(productService.getProduct("12315")).willReturn(
-                new productDTO("15871","pen",5000,2000));
+        given(productService.getProduct(1L)).willReturn(
+                new productDTO(2L,"pen",5000,2000));
 
-        String productID = "12315";
+        Long productID = 1L;
 
         mockMvc.perform(
                 get("/product/get/" + productID))
@@ -52,17 +52,17 @@ public class ProductControllerTest {
                 .andExpect(jsonPath("$.productStock").exists())
                 .andDo(print());
 
-        verify(productService).getProduct("12315"); //해당 객체의 메소드가 실행 되었는지 체크
+        verify(productService).getProduct(1L); //해당 객체의 메소드가 실행 되었는지 체크
     }
 
     @Test
     @DisplayName("Product 데이터 생성 테스트")
     void createProductTest() throws Exception{
         //Mock 객체에서 특정 메소드가 실행되는 경우 실제 return을 줄 수 없기 때문에 아래와 같이 기정사실 생성
-        given(productService.saveProduct("15871","pen",5000,2000)).willReturn(
-                new productDTO("15871","pen",5000,2000));
+        given(productService.saveProduct(1L,"pen",5000,2000)).willReturn(
+                new productDTO(1L,"pen",5000,2000));
 
-        productDTO productdto = productDTO.builder().productID("15871").productName("pen")
+        productDTO productdto = productDTO.builder().productID(2L).productName("pen")
                 .productPrice(5000).productStock(2000).build();
 
         Gson gson = new Gson();
@@ -82,6 +82,6 @@ public class ProductControllerTest {
                 .andExpect(jsonPath("$.productStock").exists())
                 .andDo(print());
 
-        verify(productService).saveProduct("15871","pen",5000,2000);
+        verify(productService).saveProduct(1L,"pen",5000,2000);
     }
 }

@@ -22,7 +22,7 @@ public class ProductDAOImpl implements productDAO {
     }
 
     @Override
-    public productEntity getProduct(String productId) {
+    public productEntity getProduct(Long productId) {
         productEntity productentity = productrepository.getById(productId);
         return productentity;
     }
