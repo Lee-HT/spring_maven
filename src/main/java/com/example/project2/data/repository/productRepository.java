@@ -1,7 +1,10 @@
 package com.example.project2.data.repository;
 
 import com.example.project2.data.entity.productEntity;
+import io.swagger.models.auth.In;
 import java.util.List;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface productRepository extends JpaRepository<productEntity, Long> {
@@ -42,7 +45,7 @@ public interface productRepository extends JpaRepository<productEntity, Long> {
     List<productEntity> findByproductStockIsNotNull();
 
     // And, Or
-//    List<productEntity> findTopByproductIDAndproductName(Long id, String name);
+//    List<productEntity> findTopByproductIDAndproductName(Long id, String name); // product 대문자로..
 
     // (Is)GreaterThan. (Is)LessThan, (Is)Between
     List<productEntity> findByproductPriceGreaterThan(Integer price);
@@ -50,5 +53,14 @@ public interface productRepository extends JpaRepository<productEntity, Long> {
     // (Is)Like, (Is)Containing, (Is)StartingWith, (Is)EndingWith
     List<productEntity> findByproductNameContaining(String name);
 
+    //정렬 , 페이징
+//    List<productEntity> findByproductNameContainingOrderByproductStockAsc(String name);
+//    List<productEntity> findByproductNameContainingOrderByproductStockDesc(String name);
+
+//    List<productEntity> findByproductNameContainingOrderByproductPriceAscStockDesc(String name);
+
+    List<productEntity> findByproductNameContaining(String name, Sort sort);
+
+    List<productEntity> findByproductPriceGreaterThan(Integer price, Pageable pageable);
 
 }
