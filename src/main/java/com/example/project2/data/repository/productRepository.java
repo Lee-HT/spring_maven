@@ -1,7 +1,6 @@
 package com.example.project2.data.repository;
 
 import com.example.project2.data.entity.productEntity;
-import io.swagger.models.auth.In;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -13,61 +12,61 @@ public interface productRepository extends JpaRepository<productEntity, Long> {
     /* 쿼리 메소드의 주제 키워드 */
 
     //조회
-    List<productEntity> findByproductName(String name);
-    List<productEntity> queryByproductName(String name);
+    List<productEntity> findByProductName(String name);
+    List<productEntity> queryByProductName(String name);
 
     //존재 유무
-    boolean existsByproductName(String name);
+    boolean existsByProductName(String name);
 
     //쿼리 결과 개수
-    long countByproductName(String name);
+    long countByProductName(String name);
 
     //삭제
-    void deleteByproductID(Long id);
-    long removeByproductID(Long id);
+    void deleteByProductID(Long id);
+    long removeByProductID(Long id);
 
     //값 개수 제한
-    List<productEntity> findFirst5ByproductName(String name);
-    List<productEntity> findTop3ByproductName(String name);
+    List<productEntity> findFirst5ByProductName(String name);
+    List<productEntity> findTop3ByProductName(String name);
 
     /* 쿼리 메소드의 조건자 키워드 */
 
     // Is, Equals (생략 가능)
     // Logical Keyword : IS, Keyword Expressions : Is, Equals, (or no keyword)
     // findByNumber 메소드와 동일하게 동작
-    productEntity findByproductIDIs(Long id);
-    productEntity findByproductIDEquals(Long id);
+    productEntity findByProductIDIs(Long id);
+    productEntity findByProductIDEquals(Long id);
 
     // (Is)Not
-    List<productEntity> findByproductIDNot(Long id);
-    List<productEntity> findByproductIDIsNot(Long id);
+    List<productEntity> findByProductIDNot(Long id);
+    List<productEntity> findByProductIDIsNot(Long id);
 
     // (Is)Null, (Is)Notnull
-    List<productEntity> findByproductStockIsNull();
-    List<productEntity> findByproductStockIsNotNull();
+    List<productEntity> findByProductStockIsNull();
+    List<productEntity> findByProductStockIsNotNull();
 
     // And, Or
-//    List<productEntity> findTopByproductIDAndproductName(Long id, String name); // product 대문자로..
+//    List<productEntity> findTopByProductIDAndProductName(Long id, String name); // product 대문자로..
 
     // (Is)GreaterThan. (Is)LessThan, (Is)Between
-    List<productEntity> findByproductPriceGreaterThan(Integer price);
+    List<productEntity> findByProductPriceGreaterThan(Integer price);
 
     // (Is)Like, (Is)Containing, (Is)StartingWith, (Is)EndingWith
-    List<productEntity> findByproductNameContaining(String name);
+    List<productEntity> findByProductNameContaining(String name);
 
     //정렬 , 페이징
-//    List<productEntity> findByproductNameContainingOrderByproductStockAsc(String name);
-//    List<productEntity> findByproductNameContainingOrderByproductStockDesc(String name);
+//    List<productEntity> findByProductNameContainingOrderByProductStockAsc(String name);
+//    List<productEntity> findByProductNameContainingOrderByProductStockDesc(String name);
 
-//    List<productEntity> findByproductNameContainingOrderByproductPriceAscStockDesc(String name);
+//    List<productEntity> findByProductNameContainingOrderByProductPriceAscStockDesc(String name);
 
-    List<productEntity> findByproductNameContaining(String name, Sort sort);
+    List<productEntity> findByProductNameContaining(String name, Sort sort);
 
-    List<productEntity> findByproductPriceGreaterThan(Integer price, Pageable pageable);
+    List<productEntity> findByProductPriceGreaterThan(Integer price, Pageable pageable);
 
 
     // QUERY
-    @Query("SELECT p FROM productEntity p WHERE p.productPrice > 2000")
+    @Query("SELECT p FROM productEntity p WHERE p.ProductPrice > 2000")
     List<productEntity> findByPriceBasis();
 
     // nativeQuery는 JPQL이 아닌 SQL그대로
@@ -75,13 +74,13 @@ public interface productRepository extends JpaRepository<productEntity, Long> {
     @Query(value = "SELECT * FROM product p WHERE p.product_price > 2000", nativeQuery = true)
     List<productEntity> findByPriceBasisNativeQuery();
 
-    @Query("SELECT p FROM productEntity p WHERE p.productPrice > ?1")
+    @Query("SELECT p FROM productEntity p WHERE p.ProductPrice > ?1")
     List<productEntity> findByPriceWithParameter(Integer price);
 
-    @Query("SELECT p FROM productEntity p WHERE p.productPrice > :price")
+    @Query("SELECT p FROM productEntity p WHERE p.ProductPrice > :price")
     List<productEntity> findByPriceWithParameterNaming(Integer price);
 
-    @Query("SELECT p FROM productEntity p WHERE p.productPrice > :pri ")
+    @Query("SELECT p FROM productEntity p WHERE p.ProductPrice > :pri ")
     List<productEntity> findByPriceWithParameterNaming2(@Param("pri") Integer price);
 
     @Query(value = "SELECT * FROM product WHERE product_price",

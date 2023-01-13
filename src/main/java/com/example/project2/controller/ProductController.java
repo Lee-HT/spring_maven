@@ -34,7 +34,7 @@ public class ProductController {
 
         productDTO productdto = productService.getProduct(productId);
 
-        LOGGER.info("[ProductController] Response :: productID = {}, productName = {}, productPrice = {}, productStock = {}, Response Time = {}ms"
+        LOGGER.info("[ProductController] Response :: ProductID = {}, ProductName = {}, ProductPrice = {}, ProductStock = {}, Response Time = {}ms"
                 ,productdto.getProductID(),productdto.getProductName(),productdto.getProductPrice(),productdto.getProductStock()
                 ,(System.currentTimeMillis() - startTime));
         return productdto;
