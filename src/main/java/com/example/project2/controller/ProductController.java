@@ -34,8 +34,8 @@ public class ProductController {
 
         productDTO productdto = productService.getProduct(productId);
 
-        LOGGER.info("[ProductController] Response :: ProductID = {}, ProductName = {}, ProductPrice = {}, ProductStock = {}, Response Time = {}ms"
-                ,productdto.getProductID(),productdto.getProductName(),productdto.getProductPrice(),productdto.getProductStock()
+        LOGGER.info("[ProductController] Response :: productID = {}, productName = {}, productPrice = {}, productStock = {}, Response Time = {}ms"
+                ,productdto.getId(),productdto.getName(),productdto.getPrice(),productdto.getStock()
                 ,(System.currentTimeMillis() - startTime));
         return productdto;
     }
@@ -49,16 +49,16 @@ public class ProductController {
 //            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(productdto);
 //        }
 
-        Long productID = productdto.getProductID();
-        String productName = productdto.getProductName();
-        int productPrice = productdto.getProductPrice();
-        int productStock = productdto.getProductStock();
+        Long productID = productdto.getId();
+        String productName = productdto.getName();
+        int productPrice = productdto.getPrice();
+        int productStock = productdto.getStock();
 
         productDTO response = productService.saveProduct(productID,productName,productPrice,productStock);
 
         LOGGER.info(
                 "[createProduct] Response >> productID  : {}, productName : {}, productPrice : {}, productStock : {}"
-                ,response.getProductID(), response.getProductName(), response.getProductPrice(), response.getProductStock()
+                ,response.getId(), response.getName(), response.getStock(), response.getStock()
         );
         return ResponseEntity.status(HttpStatus.OK).body(response);
 

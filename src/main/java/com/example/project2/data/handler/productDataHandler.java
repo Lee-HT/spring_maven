@@ -4,7 +4,7 @@ import com.example.project2.data.entity.productEntity;
 
 public interface productDataHandler {
 
-    productEntity saveProductEntity(Long ProductID, String ProductName, int ProductPrice, int ProductStock);
+    productEntity saveProductEntity(Long Id, String name, int price, int stock);
 
-    productEntity getProductEntity(Long ProductID);
+    productEntity getProductEntity(Long Id);
 }

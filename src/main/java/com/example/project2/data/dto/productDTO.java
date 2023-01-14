@@ -19,24 +19,24 @@ public class productDTO {
 
 //    @Size(min=0,max=10)
     @NotNull
-    private Long ProductID;
+    private Long id;
     @NotNull
-    private String ProductName;
+    private String name;
     @NotNull
     @Min(value = 500)
     @Max(value = 3000000)
-    private int ProductPrice;
+    private int price;
     @NotNull
     @Min(value = 0)
     @Max(value = 10000)
-    private int ProductStock;
+    private int stock;
 
     public productEntity toEntity(){
         return productEntity.builder()
-                .ProductID(ProductID)
-                .ProductName(ProductName)
-                .ProductPrice(ProductPrice)
-                .ProductStock(ProductStock)
+                .id(id)
+                .name(name)
+                .price(price)
+                .stock(stock)
                 .build();
     }
 

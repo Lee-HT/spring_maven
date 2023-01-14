@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
@@ -49,12 +48,12 @@ public class productRepositoryTest {
         }
         System.out.println("---- Test Data ----");
 
-        List<productEntity> foundEntities = productrepository.findByProductName("상품4");
+        List<productEntity> foundEntities = productrepository.findByName("상품4");
         for (productEntity productentity : foundEntities) {
             System.out.println(productentity.toString());
         }
 
-        List<productEntity> queryEntities = productrepository.queryByProductName("상품4");
+        List<productEntity> queryEntities = productrepository.queryByName("상품4");
         for (productEntity productentity : queryEntities) {
             System.out.println(productentity.toString());
         }
@@ -69,8 +68,8 @@ public class productRepositoryTest {
         }
         System.out.println("---- Test Data ----");
 
-        System.out.println(productrepository.existsByProductName("상품4"));
-        System.out.println(productrepository.existsByProductName("상품2"));
+        System.out.println(productrepository.existsByName("상품4"));
+        System.out.println(productrepository.existsByName("상품2"));
     }
 
     @Test
@@ -82,7 +81,7 @@ public class productRepositoryTest {
         }
         System.out.println("---- Test Data");
 
-        System.out.println(productrepository.countByProductName("상품4"));
+        System.out.println(productrepository.countByName("상품4"));
     }
 
     @Test
@@ -90,8 +89,8 @@ public class productRepositoryTest {
     void deleteTest() {
         System.out.println("Before : " + productrepository.count());
 
-        productrepository.deleteByProductID(1L);
-        productrepository.removeByProductID(9L);
+        productrepository.deleteById(1L);
+        productrepository.removeById(9L);
 
         System.out.print("After : " + productrepository.count());
     }
@@ -107,12 +106,12 @@ public class productRepositoryTest {
         productrepository.save(getProduct(106L, 123, 2500, 5000));
         productrepository.save(getProduct(107L, 123, 2700, 5000));
 
-        List<productEntity> foundEntities = productrepository.findFirst5ByProductName("상품123");
+        List<productEntity> foundEntities = productrepository.findFirst5ByName("상품123");
         for (productEntity productentity : foundEntities) {
             System.out.println(productentity.toString());
         }
 
-        List<productEntity> foundEntities2 = productrepository.findTop3ByProductName("상품123");
+        List<productEntity> foundEntities2 = productrepository.findTop3ByName("상품123");
         for (productEntity productentity : foundEntities2) {
             System.out.println(productentity.toString());
         }
@@ -129,8 +128,8 @@ public class productRepositoryTest {
 
         System.out.println("---- Test Data ----");
 
-        System.out.println(productrepository.findByProductIDIs(1L));
-        System.out.println(productrepository.findByProductIDEquals(1L));
+        System.out.println(productrepository.findByIdIs(1L));
+        System.out.println(productrepository.findByIdEquals(1L));
     }
 
     @Test
@@ -142,12 +141,12 @@ public class productRepositoryTest {
             System.out.println(productentity.toString());
         }
 
-        List<productEntity> foundEntitites = productrepository.findByProductIDNot(1L);
+        List<productEntity> foundEntitites = productrepository.findByIdNot(1L);
         for(productEntity productentity : foundEntitites){
             System.out.println(productentity);
         }
 
-//        System.out.println(productrepository.findByProductIDIsNot(1L));
+        System.out.println(productrepository.findByIdIsNot(1L));
     }
 
     @Test
@@ -160,7 +159,7 @@ public class productRepositoryTest {
         }
         System.out.println("---- Test Data ----");
 
-//        System.out.println(productrepository.findTopByProductIDAndProductName(1L,"상품1"));
+        System.out.println(productrepository.findTopByIdAndName(2L,"상품4"));
     }
 
     @Test
@@ -173,7 +172,7 @@ public class productRepositoryTest {
         }
         System.out.println("---- Test Data ----");
 
-        List<productEntity> productEntities = productrepository.findByProductPriceGreaterThan(5000);
+        List<productEntity> productEntities = productrepository.findByPriceGreaterThan(5000);
 
         for(productEntity productentity : productEntities){
             System.out.println(productentity);
@@ -190,7 +189,7 @@ public class productRepositoryTest {
         }
         System.out.println("---- Test Data ----");
 
-        System.out.println(productrepository.findByProductNameContaining("상품1"));
+        System.out.println(productrepository.findByNameContaining("상품1"));
 
     }
 
@@ -199,10 +198,10 @@ public class productRepositoryTest {
         // create
         // given
         productEntity productentity = productEntity.builder()
-                .ProductID(1000L)
-                .ProductName("testP")
-                .ProductPrice(1000)
-                .ProductStock(500)
+                .id(1000L)
+                .name("testP")
+                .price(1000)
+                .stock(500)
                 .build();
 
     }
@@ -217,19 +216,20 @@ public class productRepositoryTest {
         }
         System.out.println("---- Test Data ----");
 
-//        List<productEntity> foundProducts = productrepository.findByProductNameContainingOrderByProductStockAsc("상품");
-//        for(productEntity productentity : foundProducts){
-//            System.out.println(productentity);
-//        }
+        List<productEntity> foundProducts = productrepository.findByNameContainingOrderByStockAsc("상품");
+        for(productEntity productentity : foundProducts){
+            System.out.println(productentity);
+        }
 
-//        foundProducts = productrepository.findByProductNameContainingOrderByProductStockDesc("상품");
-//        for(productEntity productentity : foundProducts){
-//            System.out.println(productentity);
-//        }
+        foundProducts = productrepository.findByNameContainingOrderByStockDesc("상품");
+        for(productEntity productentity : foundProducts){
+            System.out.println(productentity);
+        }
 
-//        foundProducts = productrepository.findByProductNameContainingOrderByProductPriceAscProductStockDesc("상품");
-//        for(productEntity productentity : foundProducts){
-//            System.out.println(productentity);
+        foundProducts = productrepository.findByNameContainingOrderByPriceAscStockDesc("상품");
+        for(productEntity productentity : foundProducts) {
+            System.out.println(productentity);
+        }
     }
 
     @Test
@@ -242,10 +242,10 @@ public class productRepositoryTest {
         }
         System.out.println("---- Test Data ----");
 
-//        List<productEntity> foundProducts = productrepository.findByProductNameContainingOrderByProductPriceAscProductStockDesc(상품);
-//        for(productEntity productentity : foundProducts){
-//            System.out.println(productentity.toString());
-//        }
+        List<productEntity> foundProducts = productrepository.findByNameContainingOrderByPriceAscStockDesc("상품");
+        for(productEntity productentity : foundProducts){
+            System.out.println(productentity.toString());
+        }
     }
 
     @Test
@@ -257,14 +257,14 @@ public class productRepositoryTest {
         }
         System.out.println("---- Test Data ----");
 
-        List<productEntity> foundProducts = productrepository.findByProductNameContaining(
-                "상품", Sort.by(Order.asc("ProductPrice")));
+        List<productEntity> foundProducts = productrepository.findByNameContaining(
+                "상품", Sort.by(Order.asc("price")));
         for(productEntity productentity : foundProducts){
             System.out.println(productentity);
         }
 
-        foundProducts = productrepository.findByProductNameContaining("상품",
-                Sort.by(Order.asc("ProductPrice"),Order.desc("ProductStock")));
+        foundProducts = productrepository.findByNameContaining("상품",
+                Sort.by(Order.asc("price"),Order.desc("price")));
         for(productEntity productentity : foundProducts){
             System.out.println(productentity);
         }
@@ -280,13 +280,13 @@ public class productRepositoryTest {
         }
         System.out.println("---- Test Data ----");
 
-        List<productEntity> foundProducts = productrepository.findByProductPriceGreaterThan(200,
+        List<productEntity> foundProducts = productrepository.findByPriceGreaterThan(200,
                 PageRequest.of(0,3));
         for(productEntity productentity : foundProducts){
             System.out.println(productentity);
         }
 
-        foundProducts = productrepository.findByProductPriceGreaterThan(200, PageRequest.of(4,2));
+        foundProducts = productrepository.findByPriceGreaterThan(200, PageRequest.of(4,2));
         for(productEntity productentity : foundProducts){
             System.out.println(productentity);
         }

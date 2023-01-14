@@ -20,14 +20,14 @@ public class productDataHandlerImpl implements productDataHandler {
     }
 
     @Override
-    public productEntity saveProductEntity(Long productID, String productName, int productPrice, int productStock){
-        productEntity productentity = new productEntity(productID, productName, productPrice, productStock);
+    public productEntity saveProductEntity(Long Id, String name, int price, int stock){
+        productEntity productentity = new productEntity(Id, name, price, stock);
 
         return productdao.saveProduct(productentity);
     }
 
     @Override
-    public productEntity getProductEntity(Long productID) {
-        return productdao.getProduct(productID);
+    public productEntity getProductEntity(Long Id) {
+        return productdao.getProduct(Id);
     }
 }

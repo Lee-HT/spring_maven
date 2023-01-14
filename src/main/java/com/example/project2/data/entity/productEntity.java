@@ -16,10 +16,10 @@ import javax.persistence.*;
 public class productEntity extends BaseEntity{
 
     @Id
-    Long ProductID;
-    String ProductName;
-    Integer ProductPrice;
-    Integer ProductStock;
+    Long id;
+    String name;
+    Integer price;
+    Integer stock;
 
     /*
     @Column
@@ -31,10 +31,10 @@ public class productEntity extends BaseEntity{
 
     public productDTO toDto(){
         return productDTO.builder()
-                .ProductID(ProductID)
-                .ProductName(ProductName)
-                .ProductPrice(ProductPrice)
-                .ProductStock(ProductStock)
+                .id(id)
+                .name(name)
+                .price(price)
+                .stock(stock)
                 .build();
     }
 

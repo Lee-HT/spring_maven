@@ -34,10 +34,10 @@ public class ProductServiceImplTest {
 
         productDTO productdto = productService.getProduct(1L);
 
-        Assertions.assertEquals(productdto.getProductID(),1L);
-        Assertions.assertEquals(productdto.getProductName(),"pen");
-        Assertions.assertEquals(productdto.getProductPrice(),2000);
-        Assertions.assertEquals(productdto.getProductStock(),3000);
+        Assertions.assertEquals(productdto.getId(),1L);
+        Assertions.assertEquals(productdto.getName(),"pen");
+        Assertions.assertEquals(productdto.getPrice(),2000);
+        Assertions.assertEquals(productdto.getStock(),3000);
 
         verify(productDataHandler).getProductEntity(1L);
     }
@@ -49,10 +49,10 @@ public class ProductServiceImplTest {
 
         productDTO productdto = productService.saveProduct(1L,"pen",2000,3000);
 
-        Assertions.assertEquals(productdto.getProductID(),1L);
-        Assertions.assertEquals(productdto.getProductName(),"pen");
-        Assertions.assertEquals(productdto.getProductPrice(),2000);
-        Assertions.assertEquals(productdto.getProductStock(),3000);
+        Assertions.assertEquals(productdto.getId(),1L);
+        Assertions.assertEquals(productdto.getName(),"pen");
+        Assertions.assertEquals(productdto.getPrice(),2000);
+        Assertions.assertEquals(productdto.getStock(),3000);
 
         verify(productDataHandler).saveProductEntity(1L,"pen",2000,3000);
     }

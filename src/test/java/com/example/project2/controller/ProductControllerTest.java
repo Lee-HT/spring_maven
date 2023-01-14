@@ -41,15 +41,15 @@ public class ProductControllerTest {
         given(productService.getProduct(1L)).willReturn(
                 new productDTO(2L,"pen",5000,2000));
 
-        Long productID = 1L;
+        Long Id = 1L;
 
         mockMvc.perform(
-                get("/product/get/" + productID))
+                get("/product/get/" + Id))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.productID").exists()) //json path의 길이가 깊어지면 .을 추가
-                .andExpect(jsonPath("$.productName").exists()) //andexpect : 기대값이 나왔는지 확인하는 메소드
-                .andExpect(jsonPath("$.productPrice").exists())
-                .andExpect(jsonPath("$.productStock").exists())
+                .andExpect(jsonPath("$.id").exists()) //json path의 길이가 깊어지면 .을 추가
+                .andExpect(jsonPath("$.name").exists()) //andexpect : 기대값이 나왔는지 확인하는 메소드
+                .andExpect(jsonPath("$.price").exists())
+                .andExpect(jsonPath("$.stock").exists())
                 .andDo(print());
 
         verify(productService).getProduct(1L); //해당 객체의 메소드가 실행 되었는지 체크
@@ -62,8 +62,8 @@ public class ProductControllerTest {
         given(productService.saveProduct(1L,"pen",5000,2000)).willReturn(
                 new productDTO(1L,"pen",5000,2000));
 
-        productDTO productdto = productDTO.builder().ProductID(2L).ProductName("pen")
-                .ProductPrice(5000).ProductStock(2000).build();
+        productDTO productdto = productDTO.builder().id(2L).name("pen")
+                .price(5000).stock(2000).build();
 
         Gson gson = new Gson();
         String content = gson.toJson(productdto);
