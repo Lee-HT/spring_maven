@@ -67,10 +67,11 @@ public interface productRepository extends JpaRepository<productEntity, Long> {
 
 
     // QUERY
+    // JPQL 사용하는 방법
     @Query("SELECT p FROM productEntity p WHERE p.price > 2000")
     List<productEntity> findByPriceBasis();
 
-    // nativeQuery는 JPQL이 아닌 SQL그대로
+    // nativeQuery는 JPQL이 아닌 SQL그대로 사용
     // FROM product , p.product_price different
     @Query(value = "SELECT * FROM product p WHERE p.price > 2000", nativeQuery = true)
     List<productEntity> findByPriceBasisNativeQuery();
