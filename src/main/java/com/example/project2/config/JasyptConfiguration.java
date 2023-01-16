@@ -11,10 +11,10 @@ public class JasyptConfiguration {
 
     @Bean(name = "jasyptEncryptor")
     public StringEncryptor stringEncryptor() {
-        String key = "iaia";
+        String password = "iaia";
         PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
         SimpleStringPBEConfig config = new SimpleStringPBEConfig();
-        config.setPassword(key);    //암호화 시 사용하는 키
+        config.setPassword(password);    //암호화 시 사용하는 키
         config.setAlgorithm("PBEWithMd5andDES");  // 암호화 알고리즘
         config.setKeyObtentionIterations("1000");   // 반복 해시 횟수
         config.setPoolSize("1");   // 인스턴스 pool
