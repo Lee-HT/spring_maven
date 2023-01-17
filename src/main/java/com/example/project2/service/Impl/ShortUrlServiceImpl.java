@@ -4,10 +4,12 @@ import com.example.project2.data.dao.ShortUrlDAO;
 import com.example.project2.data.dto.NaverUrlDTO;
 import com.example.project2.data.dto.ShortUrlResponseDTO;
 import com.example.project2.data.entity.ShortUrlEntity;
+import com.example.project2.data.repository.ShortUrlRedisRepository;
 import com.example.project2.data.repository.ShortUrlRepository;
 import com.example.project2.service.ShortUrlService;
 import java.net.URI;
 import java.util.Arrays;
+import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -24,20 +26,31 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class ShortUrlServiceImpl implements ShortUrlService {
 
     private final ShortUrlRepository shortUrlRepository;
+    private final ShortUrlRedisRepository shortUrlRedisRepository;
 
     private final ShortUrlDAO shortUrlDAO;
 //    private final ShortUrlRedisRepository shortUrlRedisRepository;
 
     @Autowired
     public ShortUrlServiceImpl(ShortUrlDAO shortUrlDAO,
-            ShortUrlRepository shortUrlRepository){
+            ShortUrlRepository shortUrlRepository, ShortUrlRedisRepository shortUrlRedisRepository){
         this.shortUrlDAO = shortUrlDAO;
 //        this.shortUrlRedisRepository = shortUrlRedisRepository;
         this.shortUrlRepository = shortUrlRepository;
+        this.shortUrlRedisRepository = shortUrlRedisRepository;
     }
 
     public ShortUrlResponseDTO getShortUrl(String clientID, String clientSecret, String originalUrl){
-        log.info("[getShortUrl] No Entity in Database");
+
+        //Cache logic
+        Optional<ShortUrlResponseDTO> foundResponseDTO = shortUrlRedisRepository.findById(originalUrl);
+        if (foundResponseDTO.isPresent()){
+            log.info("[getShortUrl] Cache Data is existed");
+            return foundResponseDTO.get();
+        }else{
+            log.info("[getShortUrl] Cache Data is not existed.");
+        }
+
         ShortUrlEntity getShortUrlEntity = shortUrlDAO.getShortUrl(originalUrl);
 
         String orgUrl;
@@ -55,6 +68,8 @@ public class ShortUrlServiceImpl implements ShortUrlService {
         }
 
         ShortUrlResponseDTO shortUrlResponseDTO = new ShortUrlResponseDTO(orgUrl, shortUrl);
+
+        shortUrlRedisRepository.save(shortUrlResponseDTO);
 
         log.info("[getShortUrl] Response DTO : {}",shortUrlResponseDTO.toString());
         return shortUrlResponseDTO;
@@ -78,6 +93,10 @@ public class ShortUrlServiceImpl implements ShortUrlService {
         shortUrlDAO.saveShortUrl(shortUrlEntity);
 
         ShortUrlResponseDTO shortUrlResponseDTO = new ShortUrlResponseDTO(orgUrl, shortUrl);
+
+        //Cache logic
+        shortUrlRedisRepository.save(shortUrlResponseDTO);
+
         log.info("[generateShortUrl] Response DTO : {}",shortUrlResponseDTO.toString());
         return shortUrlResponseDTO;
     }

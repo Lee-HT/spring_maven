@@ -1,17 +1,24 @@
 package com.example.project2.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+@Slf4j
 @Configuration
 public class JasyptConfiguration {
 
+    // -Djasypt.encryptor.password=iaia
+    @Value("${jasypt.encryptor.password}")
+    private String password;
+
     @Bean(name = "jasyptEncryptor")
     public StringEncryptor stringEncryptor() {
-        String password = "iaia";
+//        String password = "iaia";
         PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
         SimpleStringPBEConfig config = new SimpleStringPBEConfig();
         config.setPassword(password);    //암호화 시 사용하는 키

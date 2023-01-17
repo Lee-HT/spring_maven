@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  ia_redis:
+    image: redis:7.0.0
+    restart: always
+    ports:
+      - "5381:6379"
