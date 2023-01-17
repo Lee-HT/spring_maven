@@ -43,10 +43,10 @@ public class ShortUrlServiceImpl implements ShortUrlService {
     public ShortUrlResponseDTO getShortUrl(String clientID, String clientSecret, String originalUrl){
 
         //Cache logic
-        Optional<ShortUrlResponseDTO> foundResponseDTO = shortUrlRedisRepository.findById(originalUrl);
-        if (foundResponseDTO.isPresent()){
+        Optional<ShortUrlResponseDTO> foundResponseDTO = shortUrlRedisRepository.findById(originalUrl); // null 일수도 있는 객체를 감싸는 wrapper
+        if (foundResponseDTO.isPresent()){        // 객체 존재 여부 확인
             log.info("[getShortUrl] Cache Data is existed");
-            return foundResponseDTO.get();
+            return foundResponseDTO.get();        // optional 내부 객체 반환
         }else{
             log.info("[getShortUrl] Cache Data is not existed.");
         }
