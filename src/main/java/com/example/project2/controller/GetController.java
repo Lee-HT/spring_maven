@@ -11,7 +11,7 @@ public class GetController {
 
     @GetMapping("/hello/{name}")
     public String hello(@PathVariable String name) {
-        return name + "님 안녕하세요 : 1";
+        return name + "님 안녕하세요! : 1";
     }
 
     @GetMapping("/hello2/{name}/{name2}")
