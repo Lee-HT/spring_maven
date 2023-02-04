@@ -1,10 +1,10 @@
 # springboot 강의 연습 기록
 
-around hub studio의 유튜브 강의를 보며 구현해본 내용입니다.
-[around hub studio youtube playlist](https://youtube.com/playlist?list=PLlTylS8uB2fBOi6uzvMpojFrNe7sRmlzU)
+* around hub studio의 유튜브 강의를 보며 구현해본 내용입니다.
+* [around hub studio youtube playlist](https://youtube.com/playlist?list=PLlTylS8uB2fBOi6uzvMpojFrNe7sRmlzU)
 
 ## swagger 주소
-http://localhost:8040/swagger-ui/
+* http://localhost:8040/swagger-ui/
 
 ## 환경
  - IDE : 'Intellij 2022.3.1 Community Edition'
