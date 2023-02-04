@@ -2,6 +2,7 @@ package com.example.project2.controller;
 
 import com.example.project2.data.dto.ShortUrlResponseDTO;
 import com.example.project2.service.ShortUrlService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,6 +34,7 @@ public class ShortUrlController {
     }
 
     @PostMapping()
+    @Operation(summary = "ShortUrl 생성",description = "기본 주소")
     public ShortUrlResponseDTO generatedShortUrl(String originalUrl){
         log.info("[generateShortUrl] perform API. CLIENT_ID : {} CLIENT_SECRET : {}",CLIENT_ID,CLIENT_SECRET);
 
@@ -40,6 +42,7 @@ public class ShortUrlController {
     }
 
     @GetMapping()
+    @Operation(summary = "ShortUrl 검색",description = "기본 주소")
     public ShortUrlResponseDTO getShortUrl(String originalUrl){
         long startTime = System.currentTimeMillis();
         ShortUrlResponseDTO shortUrlResponseDTO = shortUrlService.getShortUrl(CLIENT_ID,CLIENT_SECRET,originalUrl);
@@ -51,9 +54,11 @@ public class ShortUrlController {
     }
 
     @PutMapping("/")
+    @Operation(summary = "사용 X")
     public ShortUrlResponseDTO updateShortUrl(String originalUrl) { return null; }
 
     @DeleteMapping("/")
+    @Operation(summary = "ShortUrl 삭제",description = "축소한 주소")
     public ResponseEntity<String> deleteShortUrl(String url){
         try{
             shortUrlService.deleteShortUrl(url);
